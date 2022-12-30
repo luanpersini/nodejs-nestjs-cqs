@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+cypress/downloads
+
+# production
+/build
+
+# misc
+.env
+auth_config.json
+config/auth_config.json
+.DS_Store

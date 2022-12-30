@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "sourceMap": true,
+    "outDir": "./backend/dist",
+    "baseUrl": "./backend",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {         
+      "@config/*": ["src/common/presentation/config/*"],  
+      "@infrastructure/*": ["src/common/infrastructure/*"],
+      "@modules/*": ["src/node_modules/*"],
+      "@presentation/*": ["src/common/presentation/*"], 
+      "@tests/*": ["tests/*"],
+      "src/*": ["src/*"],
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
