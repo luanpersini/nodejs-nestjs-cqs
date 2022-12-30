@@ -1,16 +1,27 @@
 import { AccountOperation } from './interfaces/AccountOperation'
 
-export type Operation = {
-  [key: string]: {
-    id: string
-    name: string
-  }
+type OperationsListKeys = {
+  deposit: string
+  withdraw: string
 }
 
-export const OperationsList: Operation = {
+export type Operation = {
+  id: string
+  name: string
+}
+
+type OperationsList<T> = {
+  [Property in keyof T]: Operation
+}
+
+export const OperationsList: OperationsList<OperationsListKeys> = {
   deposit: {
     id: '62d8fce2-49d2-47e5-a23a-9ef7a4bc42de',
     name: 'deposit'
+  },
+  withdraw: {
+    id: '0b9fbde9-31dd-472d-b1af-b27278e15648',
+    name: 'withdraw'
   }
 }
 

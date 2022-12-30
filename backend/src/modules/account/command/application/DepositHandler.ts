@@ -1,9 +1,9 @@
-import { BadRequestException, Inject } from '@nestjs/common'
+import { Inject } from '@nestjs/common'
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs'
-import { OperationsList } from '../../data/OperationsList'
+import { OperationNamesList } from '../../data/OperationsList'
 import { AccountOperation } from '../../domain/AccountOperation'
-import { ErrorMessages } from '../../domain/ErrorMessages'
 import { InjectionList } from '../../InjectionList'
+import { VerifyOperationHelper } from '../helpers/VerifyOperationHelper'
 import { AccountOperationRepository } from '../repositories/AccountOperationRepository'
 import { DepositCommand } from './DepositCommand'
 
@@ -18,9 +18,8 @@ export class DepositHandler implements ICommandHandler<DepositCommand, void> {
   async execute({ operation }: DepositCommand): Promise<void> {
     console.log('Step 2: The Deposit handler that subscribed to the (Deposit Command) starts its execution.')   
     
-    if (operation.operationId !== OperationsList.find((op) => op.id === operation.operationId).id) {
-      throw new BadRequestException(ErrorMessages.INVALID_OPERATION)
-    } 
+    VerifyOperationHelper.checkOperationId(operation.operationId, OperationNamesList.DEPOSIT)
+
     const balance = await this.accountOperationRepository.getAccountBalance(operation.accountId)
     const accountOperation = this.publisher.mergeObjectContext(new AccountOperation({...operation, balance }))      
         

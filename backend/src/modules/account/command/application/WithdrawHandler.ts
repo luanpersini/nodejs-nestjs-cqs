@@ -1,7 +1,9 @@
 import { Inject } from '@nestjs/common'
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs'
+import { OperationNamesList } from '../../data/OperationsList'
 import { AccountOperation } from '../../domain/AccountOperation'
 import { InjectionList } from '../../InjectionList'
+import { VerifyOperationHelper } from '../helpers/VerifyOperationHelper'
 import { AccountOperationRepository } from '../repositories/AccountOperationRepository'
 import { WithdrawCommand } from './WithdrawCommand'
 
@@ -15,6 +17,9 @@ export class WithdrawHandler implements ICommandHandler<WithdrawCommand, void> {
   ) {}
 
   async execute({ operation }: WithdrawCommand): Promise<void> {
+    
+    VerifyOperationHelper.checkOperationId(operation.operationId, OperationNamesList.WITHDRAW)
+    
     const balance = await this.accountOperationRepository.getAccountBalance(operation.accountId)
     const accountOperation = this.publisher.mergeObjectContext(new AccountOperation({ ...operation, balance }))
     
