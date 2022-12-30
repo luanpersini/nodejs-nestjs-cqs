@@ -1,5 +1,5 @@
 import { IQuery } from '@nestjs/cqrs';
 
-export class ListAccountOperationsQuery implements IQuery {
+export class GetAccountBalanceQuery implements IQuery {
   constructor(readonly accountId: string) {}
 }

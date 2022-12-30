@@ -9,8 +9,7 @@ export const CustomTable = ({ headers, lines, data, tablestyle, headerstyle = ''
   return (
     <table className={'table ' + tablestyle}>
       <thead className={headerstyle}>
-        <tr>
-          <th scope="col">#</th>
+        <tr>          
           {headers.map((header, key) => (
             <th key={key} scope="col">
               {header}
@@ -21,7 +20,6 @@ export const CustomTable = ({ headers, lines, data, tablestyle, headerstyle = ''
       <tbody>
         {data.map((data: any, key) => (
           <tr key={key}>
-            <th scope="row">{key}</th>
             {lines.map((line, key) => (
               <td key={key}>{data[line]}</td>
             ))}

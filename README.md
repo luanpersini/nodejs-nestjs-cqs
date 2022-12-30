@@ -1,24 +1,16 @@
 # Description
 
-CQS implementation using NodeJS, NestJS Typescript and Sequelize ORM. 
+CQS implementation using NodeJS, NestJS Typescript, Postgres and Sequelize ORM. 
 
 ## Local Setup
 
 1. Clone the repository
 1. Copy .env.example and save a .env file with the correct values
-1. Run `npm install`
-1. Run `npm run build`
-1. Run `npm start`
-
-## Notes
-
-Its a practice focused application. Everything was done to simulate scenarios where i could use the technologies proposed.
-
-Some objects only exists for this reason and they haven't receive a lot of love, since it would increase the complexity and time where it dosent matter for this training purpose.
-
-Hint: When practicing, its a good technique to let everything inside the same file. Everything can be later splitted into their rightful place.
-
-
+1. Install Postgres (i didnt want to use a in memory database because i wanted to run migrations )
+1. Enter each app folder (backend and frontend) and run:
+    1. `npm install`
+    1. `npm run build` (only backend)
+    1. `npm start`
 # Command Flow
 
 - Step 1: Request received in the controller > controller calls the commandBus (new Deposit Command)
@@ -49,3 +41,11 @@ The event handler is asynchronous and you must have compensating events to handl
 ## Aggregate Root / Entity
 
 The entity can validate domain rules (ex: user should have enough ballance to make a withdraw)
+
+## Other Notes
+
+Its a practice focused application. Everything was done to simulate scenarios where i could use the technologies proposed.
+
+Some objects only exists for this reason and they haven't receive a lot of love, since it would increase the complexity and time where it dosent matter for this training purpose.
+
+Hint: When practicing, its a good technique to let everything inside the same file. Everything can be later splitted into their rightful place.
