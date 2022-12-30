@@ -5,8 +5,8 @@ CQS implementation using NodeJS, NestJS Typescript, Postgres and Sequelize ORM.
 ## Local Setup
 
 1. Clone the repository
-1. Copy .env.example and save a .env file with the correct values
 1. Install Postgres (i didnt want to use a in memory database because i wanted to run migrations )
+1. Copy .env.example and save a .env file with the correct values
 1. Enter each app folder (backend and frontend) and run:
     1. `npm install`
     1. `npm run build` (only backend)
