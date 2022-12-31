@@ -4,7 +4,7 @@ interface IAccount {
   commit: () => void
 }
 
-export type AccountProperties = {
+type AccountProperties = {
   id: string
   name: string
   email: string

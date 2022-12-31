@@ -16,6 +16,7 @@ export class ListAccountOperationsQueryHandler implements IQueryHandler<ListAcco
     if (!accountExists) {
       throw new BadRequestException(ErrorMessages.INVALID_ACCOUNT)
     }
-    return await this.accountOperationQuery.listAccountOperations(query.accountId)
+      
+    return ListAccountOperationsResult.Factory(await this.accountOperationQuery.listAccountOperations(query.accountId))
   }
 }

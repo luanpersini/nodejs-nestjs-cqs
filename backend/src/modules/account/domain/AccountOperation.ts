@@ -11,7 +11,7 @@ interface IAccountOperation {
   commit: () => void
 }
 
-export type AccountOperationProperties = {
+type AccountOperationProperties = {
   id?: string
   accountId: string
   operationId: string
@@ -34,7 +34,7 @@ export class AccountOperation extends AggregateRoot implements IAccountOperation
     super()
     Object.assign(this, properties)
     this.id = uuidv4()
-    this.createdAt = new Date()
+    this.createdAt = new Date()    
   }
   creditBalance(amount: number) {
     if (this.amount < 0.01) {
