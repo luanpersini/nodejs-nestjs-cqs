@@ -37,6 +37,7 @@
     "sequelize": "^6.27.0",
     "sequelize-cli": "^6.5.2",
     "sequelize-typescript": "^2.1.5",
+    "sqlite3": "^5.1.4",
     "swagger-ui-express": "^4.4.0",
     "uuid": "^8.3.2"
   },

@@ -1,12 +1,7 @@
 import { CustomHttpClient } from '@infrastructure/http/CustomHttpClient'
 import { HttpModule } from '@nestjs/axios'
 import { Module } from '@nestjs/common'
-import { SequelizeModule } from '@nestjs/sequelize'
-import { AccountModel } from 'src/modules/account/data/AccountModel'
-import { AccountOperationModel } from 'src/modules/account/data/AccountOperationModel'
-
-
-export const models = [AccountModel, AccountOperationModel]
+import { databaseProviders } from './data/database.providers'
 
 const customHttpClient = {
   provide: 'ICustomHttpClient',
@@ -14,9 +9,9 @@ const customHttpClient = {
 }
 
 @Module({
-  imports: [SequelizeModule.forFeature(models), HttpModule],
+  imports: [HttpModule],
   controllers: [],
-  providers: [customHttpClient],
+  providers: [...databaseProviders,customHttpClient],
   exports: [customHttpClient]
 })
 export class InfrastructureModule {}
