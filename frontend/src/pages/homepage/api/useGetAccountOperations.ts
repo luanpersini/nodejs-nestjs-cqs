@@ -19,7 +19,7 @@ export const useGetAccountOperationsList = (accountId: string) => {
         createdAt: formatDate.toLocaleDate(operation.createdAt)
       }))
       return data
-    }
+    }    
     return []
   }
 

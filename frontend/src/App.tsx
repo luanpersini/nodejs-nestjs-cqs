@@ -9,7 +9,7 @@ import routes from './routes'
 const App: React.FunctionComponent<Record<string, unknown>> = (props) => { 
   return (
     <div className="app">
-      <ToastContainer style={{ fontSize: "16px", minWidth: "400px" }} position="top-right" autoClose={8000} />
+      <ToastContainer style={{ fontSize: "16px", minWidth: "400px" }} position="top-right" autoClose={5000} />
       <NavBar />
       <main className="container d-flex justify-content-center">
         <div className="col-12 col-xl-10">

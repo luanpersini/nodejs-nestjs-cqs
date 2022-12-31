@@ -20,7 +20,6 @@ export function Homepage(props: Page) {
   const accountOperations = listAccountOperations()
   const { showBalance } = useGetAccountBalance(accountId)
   const balance = showBalance()
-  console.log(showBalance())
 
   const DepositButton = () => {
     return (
