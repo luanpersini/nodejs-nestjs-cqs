@@ -6,7 +6,6 @@ import { IAccountOperationQuery } from '../queries/IAccountOperationQuery'
 import { GetAccountBalanceQuery } from './GetAccountBalanceQuery'
 import { GetAccountBalanceResult } from './GetAccountBalanceResult'
 
-// TODO replace both 'any' for the result interface
 @QueryHandler(GetAccountBalanceQuery)
 export class GetAccountBalanceQueryHandler implements IQueryHandler<GetAccountBalanceQuery, GetAccountBalanceResult> {
   @Inject(InjectionList.ACCOUNT_OPERATION_QUERY)

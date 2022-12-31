@@ -4,7 +4,6 @@ import { HttpResponse, ICustomHttpClient } from './ICustomHttpClient'
 
 @Injectable()
 
-//TODO: Implement a test for this class
 export class CustomHttpClient implements ICustomHttpClient {
   public async request(options: any): Promise<HttpResponse> {
     let axiosResponse: AxiosResponse

@@ -4,14 +4,14 @@ import { ErrorMessages } from '../../domain/ErrorMessages'
 import { InjectionList } from '../../InjectionList'
 import { IAccountOperationQuery } from '../queries/IAccountOperationQuery'
 import { ListAccountOperationsQuery } from './ListAccountOperationsQuery'
+import { ListAccountOperationsResult } from './ListAccountOperationsResult'
 
-// TODO replace both 'any' for the result interface
 @QueryHandler(ListAccountOperationsQuery)
-export class ListAccountOperationsQueryHandler implements IQueryHandler<ListAccountOperationsQuery, any> {
+export class ListAccountOperationsQueryHandler implements IQueryHandler<ListAccountOperationsQuery, ListAccountOperationsResult[]> {
   @Inject(InjectionList.ACCOUNT_OPERATION_QUERY)
   readonly accountOperationQuery: IAccountOperationQuery
 
-  async execute(query: ListAccountOperationsQuery): Promise<any> {
+  async execute(query: ListAccountOperationsQuery): Promise<ListAccountOperationsResult[]> {
     const accountExists = await this.accountOperationQuery.findAccountById(query.accountId)
     if (!accountExists) {
       throw new BadRequestException(ErrorMessages.INVALID_ACCOUNT)

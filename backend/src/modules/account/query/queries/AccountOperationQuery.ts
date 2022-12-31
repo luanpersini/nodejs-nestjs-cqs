@@ -1,19 +1,20 @@
 import { Injectable } from '@nestjs/common'
-import { AccountModel } from '../../data/AccountModel'
+import { AccountParams, fixedAccountId, mockedAccount } from '../../data/AccountModel'
 import { AccountOperationModel } from '../../data/AccountOperationModel'
 import { ListAccountOperationsResult } from '../application/ListAccountOperationsResult'
 import { IAccountOperationQuery } from './IAccountOperationQuery'
-// TODO replace any
 @Injectable()
 export class AccountOperationQuery implements IAccountOperationQuery {
-  async listAccountOperations(accountId: string): Promise<any[]> {
-    const result = await AccountOperationModel.findAll({ where: { accountId }, order: [['createdAt', 'DESC']] })    
+  async listAccountOperations(accountId: string): Promise<ListAccountOperationsResult[]> {
+    const result = await AccountOperationModel.findAll({ where: { accountId }, order: [['createdAt', 'DESC']] })
     return result.map((operation) => ListAccountOperationsResult.Factory(operation))
-  }  
+  }
 
-  // TODO move to AccountQuery
-  async findAccountById(accountId: string): Promise<any> {
-    return await AccountModel.findOne({ where: { id: accountId } })
+  async findAccountById(accountId: string): Promise<AccountParams> {
+    //fake database method
+    if (fixedAccountId !== accountId) return null
+
+    return mockedAccount
   }
 
   async getAccountBalance(accountId: string): Promise<number> {
