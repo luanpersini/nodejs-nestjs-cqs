@@ -2,7 +2,7 @@
 
 CQS implementation using NodeJS, NestJS Typescript, Postgres and Sequelize ORM. 
 
-The example implements the deposit and withdraw commands, and a query to list all operations made in a given account.
+The example implements an deposit and a withdraw commands, and a query to list all operations made in a given account.
 
 ## Local Setup
 
@@ -16,6 +16,7 @@ The example implements the deposit and withdraw commands, and a query to list al
 # CQS
 
 CQS - Command Query Separation as the name says, separates the logic of a program into **commands** (change the state of the system) and **queries** (Return a result without making any changes to the system). The persistance remains the same for both write and reading, focusing the separations at a class level.
+
 
 ![CQS](cqs-hgraca.png "By @hgraca")
 
@@ -41,14 +42,17 @@ I will describe below the **DepositCommand** and the **ListAccountOperationsQuer
 * AccountOperationRepository
 
 
-Step 1: The Request is received by the controller > controller calls the commandBus (new DepositCommand)
-Step 2: The Deposit handler that subscribed to the (Deposit Command) starts its execution (new AccountOperation).
-Step 3: The aggregate root executes its logic (accountOperation.deposit()) and define the Event that will be fired when its commited (new DepositedEvent).
-Step 4: The aggregate root is saved using a repository (AccountOperationRepository.saveAccountOperation).
-Step 5: the aggregate root is commited (accountOperation.commit) and the event is fired. The controller will now return its response.
-Step 6: The event handlers observing the fired event will execute their logic (DepositedEventHandler).
+**Steps:**
+
+
+- Step 1: The Request is received by the controller > controller calls the commandBus (new DepositCommand)
+- Step 2: The Deposit handler that subscribed to the (Deposit Command) starts its execution (new AccountOperation).
+- Step 3: The aggregate root executes its logic (accountOperation.deposit()) and define the Event that will be fired when its commited (new DepositedEvent).
+- Step 4: The aggregate root is saved using a repository (AccountOperationRepository.saveAccountOperation).
+- Step 5: the aggregate root is commited (accountOperation.commit) and the event is fired. The controller will now return its response.
+- Step 6: The event handlers observing the fired event will execute their logic (DepositedEventHandler).
     - This happens asynchronously and doesn't return any value to the interface. Because of that, you must have compensating events to handle errors.
-Step 7: Operation is completed.
+- Step 7: Operation is completed.
 
 
 ## Controller
