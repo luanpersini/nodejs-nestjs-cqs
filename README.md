@@ -2,12 +2,11 @@
 
 CQS implementation using NodeJS, NestJS Typescript, Postgres and Sequelize ORM. 
 
-The example implements an deposit and a withdraw commands, and a query to list all operations made in a given account.
+The example implements a deposit and an withdraw command and a query to list all operations made in a given account.
 
 ## Local Setup
 
 1. Clone the repository
-1. Install Postgres (i didnt want to use a in memory database because i wanted to run migrations )
 1. Copy .env.example and save a .env file with the correct values
 1. Enter each app folder (backend and frontend) and run:
     1. `npm install`

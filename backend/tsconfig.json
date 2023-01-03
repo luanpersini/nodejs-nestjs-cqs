@@ -14,10 +14,10 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {         
-      "@config/*": ["src/common/presentation/config/*"],  
-      "@infrastructure/*": ["src/common/infrastructure/*"],
+      "@config/*": ["src/presentation/config/*"],  
+      "@infrastructure/*": ["src/infrastructure/*"],
       "@modules/*": ["src/node_modules/*"],
-      "@presentation/*": ["src/common/presentation/*"], 
+      "@presentation/*": ["src/presentation/*"], 
       "@tests/*": ["tests/*"],
       "src/*": ["src/*"],
     }
