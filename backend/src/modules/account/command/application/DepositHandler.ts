@@ -16,7 +16,7 @@ export class DepositHandler implements ICommandHandler<DepositCommand, void> {
   ) {}
 
   async execute({ operation }: DepositCommand): Promise<void> {
-    console.log('Step 2: The Deposit handler that subscribed to the (Deposit Command) starts its execution.')
+    console.log('Step 2: The Deposit handler that subscribed to the (DepositCommand) starts its execution.')
 
     VerifyOperationHelper.checkOperationId(operation.operationId, OperationNamesList.DEPOSIT)
     VerifyOperationHelper.checkIfAccountExists(await this.accountOperationRepository.findAccountById(operation.accountId))
@@ -27,7 +27,7 @@ export class DepositHandler implements ICommandHandler<DepositCommand, void> {
     accountOperation.deposit()
     await this.accountOperationRepository.saveAccountOperation(accountOperation)
 
-    console.log('Step 4: aggregate root is saved using a repository.')
+    console.log('Step 4: The aggregate root is saved using a repository.')
     console.log('Step 5: the aggregate root is commited and the event is fired. The controller will now return its response.')
     accountOperation.commit()
   }
