@@ -58,10 +58,8 @@ I will describe below the **DepositCommand** and the **ListAccountOperationsQuer
 - Deposited Event Handler
 - AccountOperationRepository
 
-<br>
 
 **Steps:**
-
 
 1. The Request is received by the controller > controller calls the commandBus (new DepositCommand)
 1. The Deposit handler that subscribed to the (DepositCommand) starts its execution (new AccountOperation).
