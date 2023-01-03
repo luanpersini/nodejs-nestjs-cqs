@@ -12,6 +12,8 @@ export class AccountOperationRepository implements IAccountOperationRepository {
 
   async getAccountBalance(accountId: string): Promise<number> {
     const account = await AccountOperationModel.findOne({ where: { accountId: accountId }, order: [['createdAt', 'DESC']] })
+    console.log(account);
+    
     if (account?.balance) return Number(account.balance)
     return 0
   }

@@ -1,6 +1,6 @@
-import { BadRequestException, Inject } from '@nestjs/common'
+import { Inject } from '@nestjs/common'
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs'
-import { ErrorMessages } from '../../domain/ErrorMessages'
+import { VerifyOperationHelper } from '../../command/helpers/VerifyOperationHelper'
 import { InjectionList } from '../../InjectionList'
 import { IAccountOperationQuery } from '../queries/IAccountOperationQuery'
 import { ListAccountOperationsQuery } from './ListAccountOperationsQuery'
@@ -12,10 +12,7 @@ export class ListAccountOperationsQueryHandler implements IQueryHandler<ListAcco
   readonly accountOperationQuery: IAccountOperationQuery
 
   async execute(query: ListAccountOperationsQuery): Promise<ListAccountOperationsResult[]> {
-    const accountExists = await this.accountOperationQuery.findAccountById(query.accountId)
-    if (!accountExists) {
-      throw new BadRequestException(ErrorMessages.INVALID_ACCOUNT)
-    }
+    VerifyOperationHelper.checkIfAccountExists(await this.accountOperationQuery.findAccountById(query.accountId)) 
       
     return ListAccountOperationsResult.Factory(await this.accountOperationQuery.listAccountOperations(query.accountId))
   }

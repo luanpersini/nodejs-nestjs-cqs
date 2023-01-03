@@ -16,23 +16,24 @@ export class DepositHandler implements ICommandHandler<DepositCommand, void> {
   ) {}
 
   async execute({ operation }: DepositCommand): Promise<void> {
-    console.log('Step 2: The Deposit handler that subscribed to the (Deposit Command) starts its execution.')   
-    
+    console.log('Step 2: The Deposit handler that subscribed to the (Deposit Command) starts its execution.')
+
     VerifyOperationHelper.checkOperationId(operation.operationId, OperationNamesList.DEPOSIT)
+    VerifyOperationHelper.checkIfAccountExists(await this.accountOperationRepository.findAccountById(operation.accountId))
 
     const balance = await this.accountOperationRepository.getAccountBalance(operation.accountId)
-    const accountOperation = this.publisher.mergeObjectContext(new AccountOperation({...operation, balance }))      
-        
-    accountOperation.deposit()   
+    const accountOperation = this.publisher.mergeObjectContext(new AccountOperation({ ...operation, balance }))
+
+    accountOperation.deposit()
     await this.accountOperationRepository.saveAccountOperation(accountOperation)
-    
-    console.log('Step 4: aggregate root is saved using a repository.')  
+
+    console.log('Step 4: aggregate root is saved using a repository.')
     console.log('Step 5: the aggregate root is commited and the event is fired. The controller will now return its response.')
     accountOperation.commit()
-    
   }
 }
 
+//Transaction should be used in a real case scenario.
 /*
 {
   "accountId": "8ff48b93-66eb-46e3-ae47-7dac6606b68f",

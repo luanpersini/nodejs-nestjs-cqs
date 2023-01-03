@@ -7,7 +7,6 @@ import { VerifyOperationHelper } from '../helpers/VerifyOperationHelper'
 import { AccountOperationRepository } from '../repositories/AccountOperationRepository'
 import { WithdrawCommand } from './WithdrawCommand'
 
-//Transaction should be used in a real case scenario. This wont be done because its not in the scope of the training (Command/Query)
 @CommandHandler(WithdrawCommand)
 export class WithdrawHandler implements ICommandHandler<WithdrawCommand, void> {
   constructor(
@@ -19,6 +18,7 @@ export class WithdrawHandler implements ICommandHandler<WithdrawCommand, void> {
   async execute({ operation }: WithdrawCommand): Promise<void> {
     
     VerifyOperationHelper.checkOperationId(operation.operationId, OperationNamesList.WITHDRAW)
+    VerifyOperationHelper.checkIfAccountExists(await this.accountOperationRepository.findAccountById(operation.accountId)) 
     
     const balance = await this.accountOperationRepository.getAccountBalance(operation.accountId)
     const accountOperation = this.publisher.mergeObjectContext(new AccountOperation({ ...operation, balance }))
@@ -28,3 +28,12 @@ export class WithdrawHandler implements ICommandHandler<WithdrawCommand, void> {
     accountOperation.commit()
   }
 }
+
+/*
+{
+  "accountId": "8ff48b93-66eb-46e3-ae47-7dac6606b68f",
+  "operationId": "0b9fbde9-31dd-472d-b1af-b27278e15648",
+  "sourceId": "c0ce9f97-2931-415f-b6af-06dbbe3254dc",
+  "amount": "100.00"
+}
+*/
